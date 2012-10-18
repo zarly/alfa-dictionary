@@ -1,0 +1,35 @@
+﻿{
+  "name": "Alfa-dictionary",
+  "version": "1.7",
+  "description": "Англо-русский словарь - перевод по наведению мышки",
+
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "unlimitedStorage",
+    "contextMenus"
+  ],
+  
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+
+  "browser_action": {
+    "default_icon": "images/icon16.png"
+  },
+
+  "background_page": "main.html",
+  "options_page": "options.html",
+  
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["jquery-1.7.1.min.js", "dict.js", "translator.js", "libs.js"],
+      "css": ["main.css"],
+      "run_at": "document_end"
+    }
+  ]
+}

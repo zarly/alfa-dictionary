@@ -1,0 +1,43 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="options.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="freqDictionary.js"></script>
+	<script type="text/javascript" src="options.js"></script>
+</head>
+
+<body onload="init();">
+	
+	<br/>
+	
+	<div class="menu">
+		ID пользователя: <input type="input" id="inpLogin" value="" readonly style="border: 0px; background: transparent"/>
+	</div>
+	
+	<br/>
+
+    <div class="menu">
+        <label><span id="lngBackup">Резервные копии</span></label>
+        <input type="button" id="btnMakeDump" value="Создать резервную копию" onclick="$('#backup_textarea').val(dump_make()); alert('Копия создана, сохраните её в текстовой файл');"/>
+        <input type="button" id="btnLoadDump" value="Востановить из копии" onclick="dump_load($('#backup_textarea').val()); alert('Копия загружена');"/>
+        <textarea id="backup_textarea"></textarea>
+    </div>
+	
+	<br />
+
+    <div class="menu">
+        <label><span id="lngUnknown">Незнакомые слова</span> (выучено <span id="statsKnown">0%</span>)</label>
+        <div id="unknownWordsList"></div>
+    </div>
+	
+	<br />
+	
+    <div class="center">
+		<p>&copy; Александр Абрамов, 2012<br> <a href="mailto:abramov997@gmail.com">abramov997@gmail.com</a></p>
+    </div>
+    
+</body>
+</html>
