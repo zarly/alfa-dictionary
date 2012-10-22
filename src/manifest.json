@@ -1,6 +1,6 @@
 ﻿{
   "name": "Alfa-dictionary",
-  "version": "1.7",
+  "version": "1.8",
   "description": "Англо-русский словарь - перевод по наведению мышки",
 
   "permissions": [
@@ -27,7 +27,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["jquery-1.7.1.min.js", "dict.js", "translator.js", "libs.js"],
+      "js": ["jquery-1.7.1.min.js", "dict.js", "libs.js"],
       "css": ["main.css"],
       "run_at": "document_end"
     }
