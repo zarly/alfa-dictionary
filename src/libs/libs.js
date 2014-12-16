@@ -159,7 +159,7 @@ function eng_plugin_servce_words(storage){
             var user = storage['$user'];
 		}
 		function on_error(data){
-			isOvered && document.title = '?..?..?..?';
+			if(isOvered) document.title = '?..?..?..?';
 		}
 		if(!title) title = document.title;
 		if(dict[word]){

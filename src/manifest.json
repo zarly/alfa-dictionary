@@ -29,8 +29,8 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["jquery-1.7.1.min.js", "dict.js", "libs.js"],
-      "css": ["main.css"],
+      "js": ["libs/jquery-1.7.1.min.js", "libs/dict.js", "libs/libs.js"],
+      "css": ["css/main.css"],
       "run_at": "document_end"
     }
   ]
