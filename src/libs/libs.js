@@ -121,7 +121,7 @@ function eng_plugin_servce_words(storage){
 				elems[word][i].className="";
 			}
 			storage[word]=1;
-			chrome.extension.sendRequest({word: word, state: 1}, function(response) {});
+			chrome.extension.sendMessage({word: word, state: 1}, function(response) {});
 			hide_transcript();
 		} else {
 			e.target.className=markClass;
@@ -129,7 +129,7 @@ function eng_plugin_servce_words(storage){
 				elems[word][i].className=markClass;
 			}
 			storage[word]=0;
-			chrome.extension.sendRequest({word: word, state: 0}, function(response) {});
+			chrome.extension.sendMessage({word: word, state: 0}, function(response) {});
 			show_transcript(word);
 		}
 	}
@@ -152,14 +152,15 @@ function eng_plugin_servce_words(storage){
 	}
 	function show_transcript(word){
 		function on_success(data){
-			if(isOvered) {
-				document.title = data;
-				notifyBox.show(data);
-			}
-            var user = storage['$user'];
+                    if(isOvered) {
+                        var translation = (data && data.text && data.text[0]) || 'перевод не найден';
+                        document.title = translation;
+                        notifyBox.show(translation);
+                    }
+                    //var user = storage['$user'];
 		}
 		function on_error(data){
-			if(isOvered) document.title = '?..?..?..?';
+                    if(isOvered) document.title = '?..?..?..?';
 		}
 		if(!title) title = document.title;
 		if(dict[word]){
@@ -169,9 +170,9 @@ function eng_plugin_servce_words(storage){
 			document.title = 'loading...';
 			notifyBox.show('loading...');
 			$.ajax({
-				url: 'http://translate.yandex.ru/tr.json/translate',
+				url: 'https://translate.yandex.net/api/v1.5/tr.json/translate',
 				data: {
-					format: '',
+                                        key: 'trnsl.1.1.20141216T193009Z.52a9cfb24336f4b0.826770255dcb02ae9cdef021bf29534aa735411a',
 					lang: 'en-ru',
 					text: word
 				},
@@ -207,7 +208,7 @@ function eng_plugin_servce_words(storage){
 	transformPage();
 }
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	try{
 		if(runned) return;
 		runned = true;

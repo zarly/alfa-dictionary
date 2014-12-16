@@ -23,7 +23,10 @@
     "default_icon": "images/icon16.png"
   },
 
-  "background_page": "main.html",
+  "background": {
+    "scripts": ["eventPage.js"],
+    "persistent": false
+  },
   "options_page": "options.html",
   
   "content_scripts": [

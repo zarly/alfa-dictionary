@@ -1,6 +1,3 @@
-﻿<html>
-<head>
-<script>
 chrome.browserAction.onClicked.addListener(function(tab) {
 	chrome.tabs.getSelected(null, function(tab) {
 		try{
@@ -8,7 +5,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 			for(wrd in localStorage){
 				storage_dump[wrd]=localStorage[wrd];
 			}
-			chrome.tabs.sendRequest(tab.id, storage_dump, function(response) {});
+			chrome.tabs.sendMessage(tab.id, storage_dump, function(response) {});
 		}catch(e){
 			alert(e);
 		}
@@ -21,22 +18,16 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab) {
 	
 	try{
 		var wrd, storage_dump={$user: localStorage['$user'], $mode: 'just_translate'};
-		chrome.tabs.sendRequest(tab.id, storage_dump, function(response) {});
+		chrome.tabs.sendMessage(tab.id, storage_dump, function(response) {});
 	}catch(e){
 		alert(e);
 	}
 });
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	if(request.state){
 		localStorage[request.word]=1;
 	}else{
 		localStorage[request.word]=0;
 	}
-	sendResponse({});
+	sendMessage({});
 });
-</script>
-</head>
-<body>
-
-</body>
-</html>
