@@ -4,12 +4,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="options.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="libs/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="freqDictionary.js"></script>
 	<script type="text/javascript" src="options.js"></script>
 </head>
 
-<body onload="init();">
+<body>
 	
 	<br/>
 	
@@ -21,8 +21,8 @@
 
     <div class="menu">
         <label><span id="lngBackup">Резервные копии</span></label>
-        <input type="button" id="btnMakeDump" value="Создать резервную копию" onclick="$('#backup_textarea').val(dump_make()); alert('Копия создана, сохраните её в текстовой файл');"/>
-        <input type="button" id="btnLoadDump" value="Востановить из копии" onclick="dump_load($('#backup_textarea').val()); alert('Копия загружена');"/>
+        <input type="button" id="btnMakeDump" value="Создать резервную копию"/>
+        <input type="button" id="btnLoadDump" value="Востановить из копии"/>
         <textarea id="backup_textarea"></textarea>
     </div>
 	

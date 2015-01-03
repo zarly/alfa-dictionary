@@ -1,9 +1,16 @@
 ﻿
-function init()
-{
+$(function init() {
+    $('#btnMakeDump').on('click', function () {
+        $('#backup_textarea').val(dump_make()); alert('Копия создана, сохраните её в текстовой файл');
+    });
+
+    $('#btnLoadDump').on('click', function () {
+        dump_load($('#backup_textarea').val()); alert('Копия загружена');
+    });
+
     $('#inpLogin').val(localStorage['$user']);
-	showStudyList();
-}
+    showStudyList();
+});
 
 /**************************************************************************
 ************************   Backup and restore   ***************************
