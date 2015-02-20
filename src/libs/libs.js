@@ -152,15 +152,15 @@ function eng_plugin_servce_words(storage){
 	}
 	function show_transcript(word){
 		function on_success(data){
-                    if(isOvered) {
-                        var translation = (data && data.text && data.text[0]) || 'перевод не найден';
-                        document.title = translation;
-                        notifyBox.show(translation);
-                    }
-                    //var user = storage['$user'];
+			if(isOvered) {
+				var translation = (data && data.text && data.text[0]) || 'перевод не найден';
+				document.title = translation;
+				notifyBox.show(translation);
+			}
+			//var user = storage['$user'];
 		}
 		function on_error(data){
-                    if(isOvered) document.title = '?..?..?..?';
+			if(isOvered) document.title = '?..?..?..?';
 		}
 		if(!title) title = document.title;
 		if(dict[word]){
@@ -172,7 +172,7 @@ function eng_plugin_servce_words(storage){
 			$.ajax({
 				url: 'https://translate.yandex.net/api/v1.5/tr.json/translate',
 				data: {
-                                        key: 'trnsl.1.1.20141216T193009Z.52a9cfb24336f4b0.826770255dcb02ae9cdef021bf29534aa735411a',
+					key: 'trnsl.1.1.20141216T193009Z.52a9cfb24336f4b0.826770255dcb02ae9cdef021bf29534aa735411a',
 					lang: 'en-ru',
 					text: word
 				},
