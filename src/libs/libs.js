@@ -59,13 +59,10 @@ function eng_plugin_servce_words(storage){
 			tn.innerHTML = RegExp.$2;
 			word = RegExp.$2.toLowerCase();
 			word = commonizeWord(word);
-			if (!elems[word]) elems[word]=[];
+			if ('string' !== typeof elems[word]) elems[word]=[];
 			elems[word].push(tn);
 			if ("1" !== storage[word]){
 				tn.className = markClass;
-				//if (markColor) {
-				//	tn.style.color = markColor;
-				//}
 			}
 			df.appendChild(tn);
 			str = str.replace(reg, '');
