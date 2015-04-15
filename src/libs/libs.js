@@ -34,10 +34,19 @@ var notifyBox = (function() {
 
 function eng_plugin_servce_words(storage){
 	var port = chrome.extension.connect();
+	var markClass='alfaDictionaryWord';
 	var elems={};
 	user = storage['$user'];
-	
-	var markClass='alfaDictionaryWord';
+
+	function applyVisualSettings () {
+		var markColor = storage['$unknownWordsColor'];
+		if (markColor) {
+			var el = document.createElement('style');
+			el.innerHTML = '.alfaDictionaryWord { color: ' + markColor + '; }';
+			document.body.appendChild(el);
+		}
+	}
+
 	function tf(tel){
 		var tn, df = document.createDocumentFragment();
 		
@@ -50,10 +59,13 @@ function eng_plugin_servce_words(storage){
 			tn.innerHTML = RegExp.$2;
 			word = RegExp.$2.toLowerCase();
 			word = commonizeWord(word);
-			if(!elems[word]) elems[word]=[];
+			if (!elems[word]) elems[word]=[];
 			elems[word].push(tn);
-			if("1"!==storage[word]){
-				tn.className=markClass;
+			if ("1" !== storage[word]){
+				tn.className = markClass;
+				//if (markColor) {
+				//	tn.style.color = markColor;
+				//}
 			}
 			df.appendChild(tn);
 			str = str.replace(reg, '');
@@ -70,6 +82,8 @@ function eng_plugin_servce_words(storage){
 		}else if(word.substring(word.length-2,word.length)=='es'){
 			return commonizeWord(word.substring(0,word.length-1));
 		}else if(word[word.length-1]=="s"){
+			return commonizeWord(word.substring(0,word.length-1));
+		}else if(word[word.length-1]=="'s"){
 			return commonizeWord(word.substring(0,word.length-1));
 		}else if(word[word.length-1]=="'"){
 			return commonizeWord(word.substring(0,word.length-1));
@@ -193,6 +207,7 @@ function eng_plugin_servce_words(storage){
 			tf(are[j]);
 			delete(are[j]);
 		}
+		applyVisualSettings();
 		var elements = document.getElementsByTagName('w');
 		var i=0;
 		document.title='0/'+elements.length;
